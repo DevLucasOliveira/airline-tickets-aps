@@ -1,9 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ticket-confirm</ion-title>
+  <ion-toolbar color="primary">
+    <ion-text>
+      <ion-row>
+        <ion-col class="ion-align-items-start">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-title size="auto"> Airline Tickets </ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-text>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-list class="ion-text-center" style="font-size: 3px;">
+    <ion-item>
+      <ion-label color="medium" slot="start">Passagem</ion-label>
+      <ion-label slot="end">R$ 50,00</ion-label>
+    </ion-item>
+    <div class="hr"> </div>
+    <ion-item>
+      <ion-label color="medium" slot="start">Bagagem</ion-label>
+      <ion-label slot="end">R$ 50,00</ion-label>
+    </ion-item>
+    <div class="hr"> </div>
+    <ion-item>
+      <ion-label color="medium" slot="start">Alimentação</ion-label>
+      <ion-label slot="end">R$ 150,00</ion-label>
+    </ion-item>
+    <div class="hr"> </div>
+    <ion-item>
+      <ion-label color="medium" slot="start">Hotel</ion-label>
+      <ion-label slot="end">R$ 350,00</ion-label>
+    </ion-item>
+    <div class="hr"> </div>
+    <ion-item>
+      <ion-label slot="start"><b>Total da Viagem</b></ion-label>
+      <ion-label slot="end"><b>R$ 600,00</b></ion-label>
+    </ion-item>
+    <div class="hr"> </div>
+  </ion-list>
 
+  <div class=" ion-margin-top ion-padding">
+    <ion-text class="ion-align-items-center" color="medium">
+      Forma de Pagamento
+    </ion-text>
+  </div>
+
+  <ion-card>
+    <ion-item>
+      <ion-icon name="card-outline" slot="start"></ion-icon>
+      <ion-label>Cartão de crédito</ion-label>
+    </ion-item>
+
+    <ion-card-content>
+      <ion-text slot="end" style="font-size: 34px;">
+        R$ 600,00
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-button color="success" expand="block">Prosseguir para compra</ion-button>
 </ion-content>
