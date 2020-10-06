@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ticket-success</ion-title>
+  <ion-toolbar color="primary">
+    <ion-text>
+      <ion-row>
+        <ion-col class="ion-align-items-start">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-title size="auto"> Payment Confirm </ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-text>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      Basta apresentar o QR Code na hora de embarcar
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ngx-qrcode [value]="qrcode"></ngx-qrcode>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TicketSuccessPageRoutingModule } from './ticket-success-routing.module';
 
 import { TicketSuccessPage } from './ticket-success.page';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TicketSuccessPageRoutingModule
+    TicketSuccessPageRoutingModule,
+    NgxQRCodeModule
   ],
   declarations: [TicketSuccessPage]
 })
-export class TicketSuccessPageModule {}
+export class TicketSuccessPageModule { }
