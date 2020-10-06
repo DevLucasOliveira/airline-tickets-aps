@@ -1,9 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+    <div class="welcome-text">
+        <p>Olá</p>
+        <p class="ion-text-capitalize">Qual será seu proximo destino ?</p>
+    </div>
+    <ion-card>
+        <ion-card-content>
+            <ion-row>
+                <ion-col class="ion-text-center ion-align-self-center" size="2">
+                    <ion-icon color="primary" name="home"></ion-icon>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Origem</ion-label>
+                        <ion-input></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center ion-align-self-center" size="2">
+                    <ion-icon color="primary" name="location-sharp"></ion-icon>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Destino</ion-label>
+                        <ion-input></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center ion-align-self-center" size="2">
+                    <ion-icon color="primary" name="calendar-sharp"></ion-icon>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Data de Ida</ion-label>
+                        <ion-datetime></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center ion-align-self-center" size="2">
+                    <ion-icon color="primary" name="calendar-sharp"></ion-icon>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Data de Volta</ion-label>
+                        <ion-datetime></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-margin-top">
+                <ion-col class="ion-align-self-end" style="flex-direction: column">
+                    <ion-row class="ion-justify-content-center">
+                        <span>Somente Ida</span>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-toggle></ion-toggle>
+                    </ion-row>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Total de Pessoas</ion-label>
+                        <ion-input type="number"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-end">
+                    <ion-button color="primary">Pesquisar</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
