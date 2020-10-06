@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: 'home',
     component: FramePageComponent,
+    data: {
+      isHome: true
+    },
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {

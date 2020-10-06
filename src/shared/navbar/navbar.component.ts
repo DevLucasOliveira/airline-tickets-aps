@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isHome = true;
+
+  constructor(private route: ActivatedRoute) {
+    this.isHome = route.snapshot.data.isHome;
+  }
 
   ngOnInit() {
+
   }
 
 }
