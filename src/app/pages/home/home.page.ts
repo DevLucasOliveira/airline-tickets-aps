@@ -12,15 +12,13 @@ export class HomePage implements OnInit {
 
   form: FormGroup;
   filter: FilterDTO = new FilterDTO();
-  date?: string; year?: string; month?: string;
-  datenow?: string;
+  date = new Date().toJSON().split('T')[0];
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
   ) {
-    this.buildDateNow();
   }
 
   ngOnInit() {
@@ -35,15 +33,6 @@ export class HomePage implements OnInit {
         this.filter = JSON.parse(params.card);
       }
     });
-  }
-
-  buildDateNow() {
-    let date = new Date();
-    this.date = date.getDate().toString();
-    this.month = date.getMonth().toString();
-    this.year = date.getFullYear().toString();
-    this.datenow = this.year + '-' + this.month + '-' + this.date;
-    console.log(this.datenow);
   }
 
   buildForm() {

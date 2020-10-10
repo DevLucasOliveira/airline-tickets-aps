@@ -41,8 +41,7 @@
                     <ion-col>
                         <ion-item>
                             <ion-label for="travelDate" position="floating">Data de Ida</ion-label>
-                            <ion-datetime min="{{this.datenow}}" name="travelDate">
-                                <!-- <ion-datetime min="2020-10-10" name="travelDate" formControlName="travelDate"> -->
+                            <ion-datetime [min]="this.date" name="travelDate" formControlName="travelDate">
                             </ion-datetime>
                         </ion-item>
                     </ion-col>
@@ -54,7 +53,7 @@
                     <ion-col>
                         <ion-item>
                             <ion-label for="returnDate" position="floating">Data de Volta</ion-label>
-                            <ion-datetime min={{this.form.controls.travelDate.value}} name="returnDate"
+                            <ion-datetime [min]="this.form.controls.travelDate.value" name="returnDate"
                                 formControlName="returnDate"></ion-datetime>
                         </ion-item>
                     </ion-col>
