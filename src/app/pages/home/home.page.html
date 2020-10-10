@@ -19,6 +19,7 @@
                         <ion-item>
                             <ion-label for="origin" position="floating">Origem</ion-label>
                             <ion-input type="text" name="origin" [(ngModel)]="filter.origin"></ion-input>
+                            <span *ngIf="submitted && !filter.origin" class="form-error">Error</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>

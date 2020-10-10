@@ -10,6 +10,7 @@ import { FilterDTO } from '../../../shared/objects';
 export class HomePage implements OnInit {
 
   filter: FilterDTO = new FilterDTO();
+  submitted = false;
 
   date = new Date().toJSON().split('T')[0];
 
@@ -33,8 +34,14 @@ export class HomePage implements OnInit {
 
 
   search() {
+    this.submitted = true;
+    if (this.validateFilter()) {
+      this.navigate(this.filter);
+    }
+  }
 
-    this.navigate(this.filter);
+  validateFilter() {
+    return this.filter.origin;
   }
 
   navigate(filterDTO: FilterDTO) {
