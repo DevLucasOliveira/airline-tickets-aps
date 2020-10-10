@@ -5,7 +5,8 @@
         <ion-icon name="location"></ion-icon>&nbsp; {{filter?.origin}} | {{filter?.destiny}}
       </ion-row>
       <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-icon name="calendar"></ion-icon>&nbsp; {{filter?.travelDate | date: 'dd/mm/yyyy'}} - {{filter?.returnDate | date: 'dd/mm/yyyy'}}
+        <ion-icon name="calendar"></ion-icon>&nbsp; {{filter?.travelDate | date: 'dd/mm/yyyy'}} -
+        {{filter?.returnDate | date: 'dd/mm/yyyy'}}
       </ion-row>
     </ion-col>
     <ion-col size="3">
@@ -13,7 +14,7 @@
         <ion-icon name="person"></ion-icon> {{filter?.totalPeople}}
       </ion-row>
       <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-button color="dark">Editar <ion-icon name="pencil"></ion-icon>
+        <ion-button color="dark" (click)="edit()">Editar <ion-icon name="pencil"></ion-icon>
         </ion-button>
       </ion-row>
     </ion-col>

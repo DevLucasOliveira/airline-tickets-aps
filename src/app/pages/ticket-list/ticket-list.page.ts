@@ -1,5 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
-import { TicketService } from './../../services/ticket.service';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,30 +11,28 @@ export class TicketListPage implements OnInit {
   filter: any;
 
   constructor(
-    private service: TicketService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getIdByParams();
+    this.getFilter();
   }
 
-  getIdByParams(){
-    this.route.params.subscribe(
-      (params) => {
-        this.getFilterById(params.id);
-      });
+  getFilter() {
+    this.route.queryParams.subscribe(params => {
+      this.filter = JSON.parse(params.card);
+    });
   }
 
-  getFilterById(id){
-    this.service.getTicketById(id).subscribe(
-      (result) => {
-        this.filter = result;
-        console.log(result);
-      },
-      (err) => {
-        console.log(err);
-      });
+  edit() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        card: JSON.stringify(this.filter)
+      }
+    };
+
+    this.router.navigate(['home'], navigationExtras);
   }
 
 }
