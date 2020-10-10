@@ -1,7 +1,7 @@
-import { TicketService } from '../../services/ticket.service';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import {FilterDTO} from '../../../shared/objects';
+import { FilterDTO } from '../../../shared/objects';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +11,27 @@ import {FilterDTO} from '../../../shared/objects';
 export class HomePage implements OnInit {
 
   form: FormGroup;
+  filter: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: TicketService
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.buildForm();
+    this.getFilter();
+    this.loadForm();
   }
 
-  buildForm(){
+  getFilter() {
+    this.route.queryParams.subscribe(params => {
+      this.filter = JSON.parse(params.card);
+    });
+  }
+
+  buildForm() {
     this.form = this.formBuilder.group({
       origin: [''],
       destiny: [''],
@@ -30,6 +40,15 @@ export class HomePage implements OnInit {
       totalPeople: [''],
       onlyTravel: [''],
     });
+  }
+
+  loadForm() {
+    this.form.controls['origin'].setValue(this.filter.origin);
+    this.form.controls['destiny'].setValue(this.filter.destiny);
+    this.form.controls['travelDate'].setValue(this.filter.travelDate);
+    this.form.controls['returnDate'].setValue(this.filter.returnDate);
+    this.form.controls['totalPeople'].setValue(this.filter.totalPeople);
+    this.form.controls['onlyTravel'].setValue(this.filter.onlyTravel);
   }
 
   search() {
@@ -42,19 +61,18 @@ export class HomePage implements OnInit {
       onlyTravel: false,
     };
 
-    this.save(filterDTO);
+    this.navigate(filterDTO);
   }
 
+  navigate(filterDTO: FilterDTO) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        card: JSON.stringify(filterDTO)
+      }
+    };
 
-  save(filterDTO: FilterDTO){
-    console.log(filterDTO);
-    this.service.addTicket(filterDTO).subscribe(
-      (result) => {
-        console.log(result);
-      },
-      (err) => {
-        console.log(err);
-      });
+    this.router.navigate(['ticket-list'], navigationExtras);
   }
+
 
 }
