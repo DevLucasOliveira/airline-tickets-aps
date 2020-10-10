@@ -1,5 +1,4 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FilterDTO } from '../../../shared/objects';
 
@@ -10,21 +9,18 @@ import { FilterDTO } from '../../../shared/objects';
 })
 export class HomePage implements OnInit {
 
-  form: FormGroup;
   filter: FilterDTO = new FilterDTO();
+
   date = new Date().toJSON().split('T')[0];
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
-    this.buildForm();
     this.getFilter();
-    this.loadForm();
   }
 
   getFilter() {
@@ -35,37 +31,10 @@ export class HomePage implements OnInit {
     });
   }
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      origin: [''],
-      destiny: [''],
-      travelDate: [''],
-      returnDate: [''],
-      totalPeople: [''],
-      onlyTravel: ['']
-    });
-  }
-
-  loadForm() {
-    this.form.controls['origin'].setValue(this.filter.origin);
-    this.form.controls['destiny'].setValue(this.filter.destiny);
-    this.form.controls['travelDate'].setValue(this.filter.travelDate);
-    this.form.controls['returnDate'].setValue(this.filter.returnDate);
-    this.form.controls['totalPeople'].setValue(this.filter.totalPeople);
-    this.form.controls['onlyTravel'].setValue(this.filter.onlyTravel);
-  }
 
   search() {
-    const filterDTO: FilterDTO = {
-      origin: this.form.controls.origin.value,
-      destiny: this.form.controls.destiny.value,
-      travelDate: this.form.controls.travelDate.value,
-      returnDate: this.form.controls.returnDate.value,
-      totalPeople: this.form.controls.totalPeople.value,
-      onlyTravel: false,
-    };
 
-    this.navigate(filterDTO);
+    this.navigate(this.filter);
   }
 
   navigate(filterDTO: FilterDTO) {
@@ -79,6 +48,9 @@ export class HomePage implements OnInit {
   }
 
 
-
-
+  onOnlyTravelChange() {
+    if (!this.filter.onlyTravel) {
+      this.filter.returnDate = null;
+    }
+  }
 }
