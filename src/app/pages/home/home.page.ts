@@ -12,12 +12,14 @@ export class HomePage implements OnInit {
 
   form: FormGroup;
   filter: FilterDTO = new FilterDTO();
+  date = new Date().toJSON().split('T')[0];
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -40,7 +42,7 @@ export class HomePage implements OnInit {
       travelDate: [''],
       returnDate: [''],
       totalPeople: [''],
-      onlyTravel: [''],
+      onlyTravel: ['']
     });
   }
 
@@ -75,6 +77,8 @@ export class HomePage implements OnInit {
 
     this.router.navigate(['ticket-list'], navigationExtras);
   }
+
+
 
 
 }
