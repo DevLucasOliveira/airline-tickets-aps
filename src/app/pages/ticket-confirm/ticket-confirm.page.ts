@@ -19,7 +19,8 @@ export class TicketConfirmPage implements OnInit {
   hotelNightPrice: number = 200;
   hotelPriceTotal: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -66,4 +67,5 @@ export class TicketConfirmPage implements OnInit {
     else
       this.hotelPriceTotal += this.food;
   }
+
 }

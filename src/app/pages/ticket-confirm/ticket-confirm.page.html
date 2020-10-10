@@ -43,15 +43,21 @@
           <ion-img src="../../../assets/baggage.svg" alt=""></ion-img>
         </ion-col>
         <ion-col size="6">
-          <ion-row text-right>
-            <ion-label>Bagagens</ion-label>
+          <ion-row class="ion-justify-content-end">
+            <ion-label><b>Bagagens</b></ion-label>
           </ion-row>
-          <ion-row>
-            <ion-button color="primary" (click)="decrementBaggage()">-</ion-button>
-            <ion-button color="primary" (click)="incrementBaggage()">+</ion-button>
-            {{ baggages }}
+          <ion-row class="ion-align-items-center">
+            <ion-col size="9">
+              <ion-icon size="large" color="primary" name="remove-circle" (click)="decrementBaggage()"></ion-icon>
+              <ion-icon size="large" color="primary" name="add-circle" (click)="incrementBaggage()"></ion-icon>
+            </ion-col>
+            <ion-col size="3">
+              {{ baggages }}
+            </ion-col>
           </ion-row>
-          <ion-row>R$ {{ baggagePriceTotal }}</ion-row>
+          <ion-row class="ion-justify-content-end">
+            <b>R$ {{ baggagePriceTotal }}</b>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -65,24 +71,36 @@
           </ion-img>
         </ion-col>
         <ion-col size="6">
-          <ion-row text-right>
-            <ion-label>Barcelona</ion-label>
+          <ion-row class="ion-justify-content-end">
+            <ion-label><b>Barcelona</b></ion-label>
           </ion-row>
-          <ion-row>
-            <ion-button color="primary" (click)="decrementHotelNight()">-</ion-button>
-            <ion-button color="primary" (click)="incrementHotelNight()">+</ion-button>
-            {{ hotelNights }}
+          <ion-row class="ion-align-items-center">
+            <ion-col size="9">
+              <ion-icon size="large" color="primary" name="remove-circle" (click)="decrementHotelNight()"></ion-icon>
+              <ion-icon size="large" color="primary" name="add-circle" (click)="incrementHotelNight()"></ion-icon>
+            </ion-col>
+            <ion-col size="3">
+              {{ hotelNights }}
+            </ion-col>
           </ion-row>
           <ion-row>
             Alimentação (R$ {{ food }}) <ion-toggle [(ngModel)]="hasFood" (click)="changeFood()"></ion-toggle>
           </ion-row>
-          <ion-row>R$ {{ hotelPriceTotal }}</ion-row>
+          <ion-row class="ion-justify-content-end">
+            <b>R$ {{ hotelPriceTotal }}</b>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-card>
 
-    R$ {{ this.baggagePriceTotal + this.hotelPriceTotal }} <ion-button (click)="goToPaymentConfirm()">SEGUINTE <ion-icon
-        name="arrow-forward-outline"></ion-icon>
-    </ion-button>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="7" class="ion-text-center">
+        <b>R$ {{ this.baggagePriceTotal + this.hotelPriceTotal }}</b>
+      </ion-col>
+      <ion-col size="5">
+        <ion-button (click)="goToPaymentConfirm()">SEGUINTE <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
