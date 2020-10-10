@@ -1,5 +1,3 @@
-
-
 <ion-content>
     <ion-toolbar color="primary">
         <ion-buttons>
@@ -13,14 +11,15 @@
     </div>
     <ion-card>
         <ion-card-content>
+            <form [formGroup]="form">
             <ion-row>
                 <ion-col class="ion-text-center ion-align-self-center" size="2">
                     <ion-icon color="primary" name="home"></ion-icon>
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label position="floating">Origem</ion-label>
-                        <ion-input></ion-input>
+                        <ion-label for="origin" position="floating">Origem</ion-label>
+                    <ion-input type="text" name="origin" formControlName="origin"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -30,8 +29,8 @@
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label position="floating">Destino</ion-label>
-                        <ion-input></ion-input>
+                        <ion-label for="destiny" position="floating">Destino</ion-label>
+                        <ion-input type="text" name="destiny" formControlName="destiny"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -41,8 +40,8 @@
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label position="floating">Data de Ida</ion-label>
-                        <ion-datetime></ion-datetime>
+                        <ion-label for="travelDate" position="floating">Data de Ida</ion-label>
+                        <ion-datetime name="travelDate" formControlName="travelDate"></ion-datetime>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -52,8 +51,8 @@
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label position="floating">Data de Volta</ion-label>
-                        <ion-datetime></ion-datetime>
+                        <ion-label for="returnDate" position="floating">Data de Volta</ion-label>
+                        <ion-datetime name="returnDate" formControlName="returnDate"></ion-datetime>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -63,21 +62,22 @@
                         <span>Somente Ida</span>
                     </ion-row>
                     <ion-row class="ion-justify-content-center">
-                        <ion-toggle></ion-toggle>
+                        <ion-toggle name="onlyTravel" formControlName="onlyTravel"></ion-toggle>
                     </ion-row>
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label position="floating">Total de Pessoas</ion-label>
-                        <ion-input type="number"></ion-input>
+                        <ion-label for="totalPeople" position="floating">Total de Pessoas</ion-label>
+                        <ion-input type="number" name="totalPeople" formControlName="totalPeople"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-padding-top">
                 <ion-col class="ion-text-end">
-                    <ion-button color="primary">Pesquisar</ion-button>
+                    <ion-button color="primary" (click)="search()">Pesquisar</ion-button>
                 </ion-col>
             </ion-row>
+            </form>
         </ion-card-content>
     </ion-card>
 
@@ -90,7 +90,8 @@
         <ion-col class="ion-padding">
             <div class="ion-align-items-start travel-card">
                 <ion-thumbnail class="thumbnail-travels">
-                    <img src="https://www.viagenscinematograficas.com.br/wp-content/uploads/2020/02/Top-10-Melhores-Praias-Brasil-Capa-2.jpg">
+                    <img
+                        src="https://www.viagenscinematograficas.com.br/wp-content/uploads/2020/02/Top-10-Melhores-Praias-Brasil-Capa-2.jpg">
                 </ion-thumbnail>
                 <div class="container-travels">
                     <div class="title-travels">
@@ -108,10 +109,11 @@
         </ion-col>
     </ion-row>
     <ion-row>
-        <ion-col  class="ion-padding">
+        <ion-col class="ion-padding">
             <div class="ion-align-items-start travel-card">
                 <ion-thumbnail class="thumbnail-travels">
-                    <img src="https://www.viagenscinematograficas.com.br/wp-content/uploads/2020/02/Top-10-Melhores-Praias-Brasil-Capa-2.jpg">
+                    <img
+                        src="https://www.viagenscinematograficas.com.br/wp-content/uploads/2020/02/Top-10-Melhores-Praias-Brasil-Capa-2.jpg">
                 </ion-thumbnail>
                 <div class="container-travels">
                     <div class="title-travels">
