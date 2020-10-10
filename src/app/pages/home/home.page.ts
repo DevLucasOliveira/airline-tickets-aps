@@ -1,6 +1,7 @@
-import { TicketService } from './../../services/ticket.service';
+import { TicketService } from '../../services/ticket.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import {FilterDTO} from '../../../shared/objects';
 
 @Component({
   selector: 'app-home',
@@ -32,22 +33,22 @@ export class HomePage implements OnInit {
   }
 
   search() {
-    var model = {
+    const filterDTO: FilterDTO = {
       origin: this.form.controls.origin.value,
       destiny: this.form.controls.destiny.value,
       travelDate: this.form.controls.travelDate.value,
       returnDate: this.form.controls.returnDate.value,
       totalPeople: this.form.controls.totalPeople.value,
       onlyTravel: false,
-    }
+    };
 
-    this.save(model);
+    this.save(filterDTO);
   }
 
 
-  save(model){
-    console.log(model);
-    this.service.addTicket(model).subscribe(
+  save(filterDTO: FilterDTO){
+    console.log(filterDTO);
+    this.service.addTicket(filterDTO).subscribe(
       (result) => {
         console.log(result);
       },
