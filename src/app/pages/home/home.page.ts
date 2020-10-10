@@ -12,12 +12,16 @@ export class HomePage implements OnInit {
 
   form: FormGroup;
   filter: FilterDTO = new FilterDTO();
+  date?: string; year?: string; month?: string;
+  datenow?: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+    this.buildDateNow();
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -33,6 +37,15 @@ export class HomePage implements OnInit {
     });
   }
 
+  buildDateNow() {
+    let date = new Date();
+    this.date = date.getDate().toString();
+    this.month = date.getMonth().toString();
+    this.year = date.getFullYear().toString();
+    this.datenow = this.year + '-' + this.month + '-' + this.date;
+    console.log(this.datenow);
+  }
+
   buildForm() {
     this.form = this.formBuilder.group({
       origin: [''],
@@ -40,7 +53,7 @@ export class HomePage implements OnInit {
       travelDate: [''],
       returnDate: [''],
       totalPeople: [''],
-      onlyTravel: [''],
+      onlyTravel: ['']
     });
   }
 
@@ -75,6 +88,8 @@ export class HomePage implements OnInit {
 
     this.router.navigate(['ticket-list'], navigationExtras);
   }
+
+
 
 
 }
