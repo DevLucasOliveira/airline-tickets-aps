@@ -11,73 +11,73 @@
     </div>
     <ion-card>
         <ion-card-content>
-            <form [formGroup]="form">
-            <ion-row>
-                <ion-col class="ion-text-center ion-align-self-center" size="2">
-                    <ion-icon color="primary" name="home"></ion-icon>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label for="origin" position="floating">Origem</ion-label>
-                    <ion-input type="text" name="origin" formControlName="origin"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col class="ion-text-center ion-align-self-center" size="2">
-                    <ion-icon color="primary" name="location-sharp"></ion-icon>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label for="destiny" position="floating">Destino</ion-label>
-                        <ion-input type="text" name="destiny" formControlName="destiny"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col class="ion-text-center ion-align-self-center" size="2">
-                    <ion-icon color="primary" name="calendar-sharp"></ion-icon>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label for="travelDate" position="floating">Data de Ida</ion-label>
-                        <ion-datetime name="travelDate" formControlName="travelDate"></ion-datetime>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col class="ion-text-center ion-align-self-center" size="2">
-                    <ion-icon color="primary" name="calendar-sharp"></ion-icon>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label for="returnDate" position="floating">Data de Volta</ion-label>
-                        <ion-datetime name="returnDate" formControlName="returnDate"></ion-datetime>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row class="ion-margin-top">
-                <ion-col class="ion-align-self-end" style="flex-direction: column">
-                    <ion-row class="ion-justify-content-center">
-                        <span>Somente Ida</span>
-                    </ion-row>
-                    <ion-row class="ion-justify-content-center">
-                        <ion-toggle name="onlyTravel" formControlName="onlyTravel"></ion-toggle>
-                    </ion-row>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label for="totalPeople" position="floating">Total de Pessoas</ion-label>
-                        <ion-input type="number" name="totalPeople" formControlName="totalPeople"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row class="ion-padding-top">
-                <ion-col class="ion-text-end">
-                    <ion-button color="primary" (click)="search()">Pesquisar</ion-button>
-                </ion-col>
-            </ion-row>
-            </form>
+                <ion-row>
+                    <ion-col class="ion-text-center ion-align-self-center" size="2">
+                        <ion-icon color="primary" name="home"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label for="origin" position="floating">Origem</ion-label>
+                            <ion-input type="text" name="origin" [(ngModel)]="filter.origin"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-text-center ion-align-self-center" size="2">
+                        <ion-icon color="primary" name="location-sharp"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label for="destiny" position="floating">Destino</ion-label>
+                            <ion-input type="text" name="destiny"  [(ngModel)]="filter.destiny"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-text-center ion-align-self-center" size="2">
+                        <ion-icon color="primary" name="calendar-sharp"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label for="travelDate" position="floating">Data de Ida</ion-label>
+                            <ion-datetime [min]="this.date" name="travelDate" [(ngModel)]="filter.travelDate">
+                            </ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-text-center ion-align-self-center" size="2">
+                        <ion-icon color="primary" name="calendar-sharp"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label for="returnDate" position="floating">Data de Volta</ion-label>
+                            <ion-datetime [disabled]="!filter.travelDate || filter.onlyTravel" [min]="filter.travelDate" name="returnDate"
+                                          [(ngModel)]="filter.returnDate"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-margin-top">
+                    <ion-col class="ion-align-self-end" style="flex-direction: column">
+                        <ion-row class="ion-justify-content-center">
+                            <span>Somente Ida</span>
+                        </ion-row>
+                        <ion-row class="ion-justify-content-center">
+                            <ion-toggle name="onlyTravel" (ngModelChange)="onOnlyTravelChange()" [(ngModel)]="filter.onlyTravel"></ion-toggle>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label for="totalPeople" position="floating">Total de Pessoas</ion-label>
+                            <ion-input type="number" name="totalPeople" [(ngModel)]="filter.totalPeople"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-padding-top">
+                    <ion-col class="ion-text-end">
+                        <ion-button color="primary" (click)="search()">Pesquisar</ion-button>
+                    </ion-col>
+                </ion-row>
         </ion-card-content>
     </ion-card>
 
