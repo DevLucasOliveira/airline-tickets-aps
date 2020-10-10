@@ -1,6 +1,7 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {FilterDTO, Ticket, TravelExtras} from '../../../shared/objects';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-ticket-list',
@@ -19,16 +20,9 @@ export class TicketListPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-
-  }
-
-  ngOnInit() {
-    this.getFilter();
-  }
-
-  getFilter() {
     this.route.queryParams.subscribe(params => {
       console.log(params);
+      this.ticketsToBuy = [];
       this.filter = JSON.parse(params.card);
       for (let i = 0; i < this.TOTAL_TICKETS_IN_LIST; i++) {
         this.ticketsToBuy.push({
@@ -38,6 +32,13 @@ export class TicketListPage implements OnInit {
         });
       }
     });
+
+  }
+
+  ngOnInit() {
+  }
+
+  getFilter() {
   }
 
   edit() {
@@ -58,6 +59,8 @@ export class TicketListPage implements OnInit {
   }
 
   getDays(ticket: Ticket) {
-    return (ticket.filter.travelDate.valueOf() - ticket.filter.returnDate.valueOf());
+    const travelDate = moment(ticket.filter.travelDate);
+    const returnDate = moment(ticket.filter.returnDate);
+    return returnDate.diff((travelDate), 'days');
   }
 }
