@@ -1,5 +1,6 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {FilterDTO, Ticket, TravelExtras} from '../../../shared/objects';
 
 @Component({
   selector: 'app-ticket-list',
@@ -8,12 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketListPage implements OnInit {
 
-  filter: any;
+  private readonly TOTAL_TICKETS_IN_LIST = 5;
+
+  filter: FilterDTO = new FilterDTO();
+  ticketsToBuy: Ticket[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.getFilter();
@@ -21,7 +28,15 @@ export class TicketListPage implements OnInit {
 
   getFilter() {
     this.route.queryParams.subscribe(params => {
+      console.log(params);
       this.filter = JSON.parse(params.card);
+      for (let i = 0; i < this.TOTAL_TICKETS_IN_LIST; i++) {
+        this.ticketsToBuy.push({
+          extras: new TravelExtras(),
+          filter: this.filter,
+          travelPrice: this.generateRandomPrice(this.filter.totalPeople)
+        });
+      }
     });
   }
 
@@ -35,4 +50,14 @@ export class TicketListPage implements OnInit {
     this.router.navigate(['home'], navigationExtras);
   }
 
+  generateRandomPrice(totalPeople: number) {
+    const minPrice = 100;
+    const maxPrice = 500;
+
+    return Math.floor(Math.random() * (maxPrice - minPrice + 1) + minPrice) * totalPeople;
+  }
+
+  getDays(ticket: Ticket) {
+    return (ticket.filter.travelDate.valueOf() - ticket.filter.returnDate.valueOf());
+  }
 }

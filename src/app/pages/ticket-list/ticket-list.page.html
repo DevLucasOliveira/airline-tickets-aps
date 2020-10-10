@@ -5,8 +5,8 @@
         <ion-icon name="location"></ion-icon>&nbsp; {{filter?.origin}} | {{filter?.destiny}}
       </ion-row>
       <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-icon name="calendar"></ion-icon>&nbsp; {{filter?.travelDate | date: 'dd/mm/yyyy'}} -
-        {{filter?.returnDate | date: 'dd/mm/yyyy'}}
+        <ion-icon name="calendar"></ion-icon>&nbsp; {{filter?.travelDate | date: 'dd/MM/yyyy'}} -
+        {{filter?.returnDate | date: 'dd/MM/yyyy'}}
       </ion-row>
     </ion-col>
     <ion-col size="3">
@@ -21,34 +21,34 @@
   </ion-item>
 
   <div class="ion-padding">
-    <h6 style="font: bolder;">Total de <label style="color: #414AAA;">10</label> passagens baratas<br>
-      de <strong>São Paulo</strong> para <strong>Salvador</strong>
+    <h6 style="font: bolder;">Total de <label style="color: #414AAA;">{{ticketsToBuy.length}}</label> passagens baratas<br>
+      de <strong>{{filter.origin}}</strong> para <strong>{{filter.destiny}}</strong>
     </h6>
 
-    <ion-card>
+    <ion-card *ngFor="let ticket of ticketsToBuy">
       <ion-row class="ion-align-items-center ion-margin-top">
         <ion-col size="9">
           <ion-icon style="color: #31d323;" name="earth"></ion-icon> GOL
         </ion-col>
-        <ion-col size="3" style="font-size: 17px;">5 dias</ion-col>
+        <ion-col size="3" style="font-size: 17px;">{{getDays(ticket)}}</ion-col>
       </ion-row>
-      <div class="hr"> </div>
+      <div class="hr"></div>
       <ion-row class="ion-align-items-center ion-margin-top">
         <ion-col size="8">
           <ion-icon name="airplane"></ion-icon> IDA<br>
-          <ion-text>Guarulhos</ion-text><br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
+          <ion-text>{{ticket.filter.destiny}}</ion-text><br>
+          <ion-text>{{ticket.filter.travelDate | date: 'dd/MM/yyyy'}}</ion-text> <br>
         </ion-col>
         <ion-col size="3">
           <ion-icon name="airplane"></ion-icon> Volta <br>
-          <ion-text>Salvador</ion-text> <br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
+          <ion-text>{{ticket.filter.origin}}</ion-text> <br>
+          <ion-text>{{ticket.filter.returnDate | date: 'dd/MM/yyyy'}}</ion-text> <br>
         </ion-col>
       </ion-row>
-      <div class="hr"> </div>
+      <div class="hr"></div>
       <ion-row class="ion-align-items-center ion-margin-top">
         <ion-col size="6">
-          <ion-text> A partir de <br> <strong>R$ 505</strong></ion-text>
+          <ion-text> A partir de <br> <strong>R$ {{ticket.travelPrice}}</strong></ion-text>
         </ion-col>
         <ion-col size="3">
           <ion-button color="primary">Selecionar <ion-icon name="location-outline"></ion-icon>
@@ -57,68 +57,5 @@
       </ion-row>
     </ion-card>
 
-    <ion-card>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="9">
-          <ion-icon style="color: #31d323;" name="earth"></ion-icon> GOL
-        </ion-col>
-        <ion-col size="3" style="font-size: 17px;">5 dias</ion-col>
-      </ion-row>
-      <div class="hr"> </div>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="8">
-          <ion-icon name="airplane"></ion-icon> IDA<br>
-          <ion-text>Guarulhos</ion-text><br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
-        </ion-col>
-        <ion-col size="3">
-          <ion-icon name="airplane"></ion-icon> Volta <br>
-          <ion-text>Salvador</ion-text> <br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
-        </ion-col>
-      </ion-row>
-      <div class="hr"> </div>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="6">
-          <ion-text> A partir de <br> <strong>R$ 505</strong></ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button color="primary">Selecionar <ion-icon name="location-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-
-    <ion-card>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="9">
-          <ion-icon style="color: #31d323;" name="earth"></ion-icon> GOL
-        </ion-col>
-        <ion-col size="3" style="font-size: 17px;">5 dias</ion-col>
-      </ion-row>
-      <div class="hr"> </div>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="8">
-          <ion-icon name="airplane"></ion-icon> IDA<br>
-          <ion-text>Guarulhos</ion-text><br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
-        </ion-col>
-        <ion-col size="3">
-          <ion-icon name="airplane"></ion-icon> Volta <br>
-          <ion-text>Salvador</ion-text> <br>
-          <ion-text>sáb, 28 nov. 2020</ion-text> <br>
-        </ion-col>
-      </ion-row>
-      <div class="hr"> </div>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="6">
-          <ion-text> A partir de <br> <strong>R$ 505</strong></ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button color="primary">Selecionar <ion-icon name="location-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
   </div>
 </ion-content>

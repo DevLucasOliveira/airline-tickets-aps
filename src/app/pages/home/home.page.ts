@@ -11,7 +11,7 @@ import { FilterDTO } from '../../../shared/objects';
 export class HomePage implements OnInit {
 
   form: FormGroup;
-  filter: any;
+  filter: FilterDTO = new FilterDTO();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +27,9 @@ export class HomePage implements OnInit {
 
   getFilter() {
     this.route.queryParams.subscribe(params => {
-      this.filter = JSON.parse(params.card);
+      if (params.card) {
+        this.filter = JSON.parse(params.card);
+      }
     });
   }
 
