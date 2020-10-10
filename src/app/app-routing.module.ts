@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'ticket-list',
+    path: 'ticket-list/:id',
     component: AppComponent,
     loadChildren: () => import('./pages/ticket-list/ticket-list.module').then(m => m.TicketListPageModule)
   },

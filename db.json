@@ -1,3 +1,13 @@
 {
-    "tickets": []
+  "tickets": [
+    {
+      "origin": "São Paulo",
+      "destiny": "Salvador",
+      "travelDate": "2020-10-10T00:01:33.012-03:00",
+      "returnDate": "2020-12-12T00:01:33.017-03:00",
+      "totalPeople": 3,
+      "onlyTravel": false,
+      "id": 1
+    }
+  ]
 }
