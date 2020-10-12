@@ -35,13 +35,16 @@ export class HomePage implements OnInit {
 
   search() {
     this.submitted = true;
-    if (this.validateFilter()) {
+    if (this.isValidFilter()) {
       this.navigate(this.filter);
     }
   }
 
-  validateFilter() {
-    return this.filter.origin;
+  isValidFilter() {
+    return this.filter.origin &&
+        this.filter.destiny &&
+        this.filter.totalPeople &&
+        this.filter.travelDate;
   }
 
   navigate(filterDTO: FilterDTO) {

@@ -19,7 +19,7 @@
                         <ion-item>
                             <ion-label for="origin" position="floating">Origem</ion-label>
                             <ion-input type="text" name="origin" [(ngModel)]="filter.origin"></ion-input>
-                            <span *ngIf="submitted && !filter.origin" class="form-error">Error</span>
+                            <span *ngIf="submitted && !filter.origin" class="form-error">Campo obrigatório!</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -31,6 +31,7 @@
                         <ion-item>
                             <ion-label for="destiny" position="floating">Destino</ion-label>
                             <ion-input type="text" name="destiny"  [(ngModel)]="filter.destiny"></ion-input>
+                            <span *ngIf="submitted && !filter.destiny" class="form-error">Campo obrigatório!</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -43,6 +44,7 @@
                             <ion-label for="travelDate" position="floating">Data de Ida</ion-label>
                             <ion-datetime [min]="this.date" name="travelDate" [(ngModel)]="filter.travelDate">
                             </ion-datetime>
+                            <span *ngIf="submitted && !filter.travelDate" class="form-error">Campo obrigatório!</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -55,6 +57,7 @@
                             <ion-label for="returnDate" position="floating">Data de Volta</ion-label>
                             <ion-datetime [disabled]="!filter.travelDate || filter.onlyTravel" [min]="filter.travelDate" name="returnDate"
                                           [(ngModel)]="filter.returnDate"></ion-datetime>
+                            <span *ngIf="submitted && !filter.returnDate && !filter.onlyTravel" class="form-error">Campo obrigatório!</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -71,6 +74,7 @@
                         <ion-item>
                             <ion-label for="totalPeople" position="floating">Total de Pessoas</ion-label>
                             <ion-input type="number" name="totalPeople" [(ngModel)]="filter.totalPeople"></ion-input>
+                            <span *ngIf="submitted && !filter.totalPeople" class="form-error">Campo obrigatório!</span>
                         </ion-item>
                     </ion-col>
                 </ion-row>
