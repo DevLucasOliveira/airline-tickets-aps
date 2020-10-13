@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {Ticket} from '../../../shared/objects';
 
 @Component({
   selector: 'app-ticket-confirm',
@@ -19,8 +20,16 @@ export class TicketConfirmPage implements OnInit {
   hotelNightPrice: number = 200;
   hotelPriceTotal: number = 0;
 
+
+  ticket: Ticket = new Ticket();
   constructor(
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.ticket = JSON.parse(params.ticket);
+      console.log(this.ticket);
+    });
+  }
 
   ngOnInit() {
   }
@@ -47,6 +56,9 @@ export class TicketConfirmPage implements OnInit {
   }
 
   decrementHotelNight() {
+    if (this.hotelNights === 1) {
+      this.hasFood = false;
+    }
     if (this.hotelNights > 0) {
       this.hotelNights--;
       this.calculateHotelPrice();
@@ -58,14 +70,28 @@ export class TicketConfirmPage implements OnInit {
   }
 
   goToPaymentConfirm() {
-    this.router.navigateByUrl('payment-confirm');
+    this.ticket.extras.countTotalHotelDays = this.hotelNights;
+    this.ticket.extras.countTotalBaggage = this.baggages;
+    this.ticket.extras.priceBaggage = this.baggagePriceTotal;
+    this.ticket.extras.priceHotel = this.hotelPriceTotal;
+    this.ticket.extras.foodIncluded = this.hasFood;
+
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        ticket: JSON.stringify(this.ticket)
+      }
+    };
+
+    this.router.navigate(['payment-confirm'], navigationExtras);
   }
 
   changeFood() {
-    if (this.hasFood)
+    if (this.hasFood) {
       this.hotelPriceTotal -= this.food;
-    else
+    }
+    else {
       this.hotelPriceTotal += this.food;
+    }
   }
 
 }

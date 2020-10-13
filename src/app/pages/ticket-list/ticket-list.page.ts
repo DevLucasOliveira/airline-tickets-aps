@@ -71,4 +71,14 @@ export class TicketListPage implements OnInit {
   generateRandomInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+
+  selectTicket(ticket: Ticket) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        ticket: JSON.stringify(ticket)
+      }
+    };
+
+    this.router.navigate(['ticket-confirm'], navigationExtras);
+  }
 }

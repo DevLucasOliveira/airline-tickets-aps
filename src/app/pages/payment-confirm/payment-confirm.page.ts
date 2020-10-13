@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Ticket} from '../../../shared/objects';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-payment-confirm',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentConfirmPage implements OnInit {
 
-  constructor() { }
+  ticket: Ticket = new Ticket();
+  priceTotal = 0;
+
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.ticket = JSON.parse(params.ticket);
+      this.calculateTravelTotalPrice();
+    });
+  }
 
   ngOnInit() {
   }
 
+  calculateTravelTotalPrice() {
+    this.priceTotal = this.ticket.travelPrice
+        + this.ticket.extras.priceHotel
+        + this.ticket.extras.priceBaggage;
+  }
 }
