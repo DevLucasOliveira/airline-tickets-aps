@@ -11,6 +11,7 @@ export class Ticket {
     filter: FilterDTO;
     travelPrice: number;
     extras: TravelExtras;
+    placePicture: string;
 }
 
 export class TravelExtras {

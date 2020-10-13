@@ -32,43 +32,42 @@
   </ion-item>
 
   <div class="ion-padding">
-    <h6 style="font: bolder;">Total de <label style="color: #414AAA;">{{ticketsToBuy.length}}</label> passagens baratas<br>
+    <h6>Total de <label style="color: #414AAA;">{{ticketsToBuy.length}}</label> passagens baratas<br>
       de <strong>{{filter.origin}}</strong> para <strong>{{filter.destiny}}</strong>
     </h6>
-
-    <ion-card *ngFor="let ticket of ticketsToBuy">
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="9">
-          <ion-icon style="color: #31d323;" name="earth"></ion-icon> GOL
-        </ion-col>
-        <ion-col size="3" style="font-size: 17px;">{{getDays(ticket)}}</ion-col>
-      </ion-row>
-      <div class="hr"></div>
-      <div class="ticket-container">
-        <div class="ticket-info-destiny">
-          <ion-icon name="airplane"></ion-icon>
-          <span>Destino</span>
-          <span>{{ticket.filter.destiny}}</span>
-          <span>{{ticket.filter.travelDate | date: 'dd/MM/yyyy'}}</span>
-        </div>
-        <div class="ticket-info-origin">
-          <ion-icon name="airplane"></ion-icon>
-          <span>Volta</span>
-          <span>{{ticket.filter.origin}}</span>
-          <span>{{ticket.filter.returnDate | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-      <div class="hr"></div>
-      <ion-row class="ion-align-items-center ion-margin-top">
-        <ion-col size="6">
-          <ion-text> A partir de <br> <strong>R$ {{ticket.travelPrice}}</strong></ion-text>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button color="primary">Selecionar <ion-icon name="location-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-
   </div>
+
+  <ion-card *ngFor="let ticket of ticketsToBuy">
+    <img [src]="ticket.placePicture" />
+    <ion-card-header>
+      <ion-card-subtitle>Destino</ion-card-subtitle>
+      <ion-card-title>{{ticket.filter.destiny}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-text>Preço: R$ {{ticket.travelPrice}},00</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>Data da Viagem: {{ticket.filter.travelDate | date: 'dd/MM/yyyy'}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!ticket.filter.onlyTravel">
+        <ion-col>
+          <ion-text>Data de Volta: {{ticket.filter.returnDate | date: 'dd/MM/yyyy'}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!ticket.filter.onlyTravel">
+        <ion-col>
+          <ion-text>Total de dias: {{getDays(ticket)}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+    <ion-col style="display: flex;" class="ion-padding ion-justify-content-end">
+      <ion-button color="primary">Selecionar <ion-icon name="location-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-card>
 </ion-content>

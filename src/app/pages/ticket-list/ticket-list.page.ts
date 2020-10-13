@@ -28,7 +28,8 @@ export class TicketListPage implements OnInit {
         this.ticketsToBuy.push({
           extras: new TravelExtras(),
           filter: this.filter,
-          travelPrice: this.generateRandomPrice(this.filter.totalPeople)
+          travelPrice: this.generateRandomPrice(this.filter.totalPeople),
+          placePicture: this.generateRandomPicture()
         });
       }
     });
@@ -52,15 +53,22 @@ export class TicketListPage implements OnInit {
   }
 
   generateRandomPrice(totalPeople: number) {
-    const minPrice = 100;
-    const maxPrice = 500;
-
-    return Math.floor(Math.random() * (maxPrice - minPrice + 1) + minPrice) * totalPeople;
+    const minRange = 100;
+    const maxRange = 500;
+    return this.generateRandomInterval(minRange, maxRange) * totalPeople;
   }
 
   getDays(ticket: Ticket) {
     const travelDate = moment(ticket.filter.travelDate);
     const returnDate = moment(ticket.filter.returnDate);
     return returnDate.diff((travelDate), 'days');
+  }
+
+  generateRandomPicture() {
+    return `assets/places/lugar-${this.generateRandomInterval(1, 3)}.jpg`;
+  }
+
+  generateRandomInterval(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }
