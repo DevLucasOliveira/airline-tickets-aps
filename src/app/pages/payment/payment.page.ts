@@ -12,8 +12,8 @@ export class PaymentPage implements OnInit {
   form: FormGroup;
 
   constructor(
-      private formBuilder: FormBuilder,
-      private router: Router
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.buildForm();
   }
@@ -32,6 +32,9 @@ export class PaymentPage implements OnInit {
   }
 
   onConfirm() {
+    if (this.form.invalid)
+      return;
+
     const navigationExtras: NavigationExtras = {
       queryParams: {
         card: JSON.stringify(this.form.value)

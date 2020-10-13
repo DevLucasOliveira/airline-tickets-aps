@@ -1,6 +1,7 @@
+import { MaskDirective } from './../directives/mask.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,8 +15,8 @@ import { PaymentPage } from './payment.page';
     FormsModule,
     IonicModule,
     PaymentPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [PaymentPage]
+  declarations: [PaymentPage, MaskDirective]
 })
-export class PaymentPageModule {}
+export class PaymentPageModule { }
