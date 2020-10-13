@@ -1,6 +1,6 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { Component, OnInit} from '@angular/core';
-import {FilterDTO, Ticket, TravelExtras} from '../../../shared/objects';
+import { Component, OnInit } from '@angular/core';
+import { FilterDTO, Ticket, TravelExtras } from '../../../shared/objects';
 import * as moment from 'moment';
 
 @Component({
@@ -25,12 +25,14 @@ export class TicketListPage implements OnInit {
       this.ticketsToBuy = [];
       this.filter = JSON.parse(params.card);
       for (let i = 0; i < this.TOTAL_TICKETS_IN_LIST; i++) {
-        this.ticketsToBuy.push({
-          extras: new TravelExtras(),
-          filter: this.filter,
-          travelPrice: this.generateRandomPrice(this.filter.totalPeople),
-          placePicture: this.generateRandomPicture()
-        });
+
+        let ticket = new Ticket();
+        ticket.extras = new TravelExtras();
+        ticket.filter = this.filter;
+        ticket.travelPrice = this.generateRandomPrice(this.filter.totalPeople);
+        ticket.placePicture = this.generateRandomPicture();
+
+        this.ticketsToBuy.push(ticket);
       }
     });
 
