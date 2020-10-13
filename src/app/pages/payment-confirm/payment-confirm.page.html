@@ -11,27 +11,23 @@
   <ion-list class="ion-text-center" style="font-size: 3px;">
     <ion-item>
       <ion-label color="medium" slot="start">Passagem</ion-label>
-      <p slot="end">R$ 50,00</p>
+      <p slot="end">R$ {{ticket.travelPrice}},00</p>
     </ion-item>
     <div class="hr"> </div>
     <ion-item>
       <ion-label color="medium" slot="start">Bagagem</ion-label>
-      <p slot="end">R$ 50,00</p>
+      <p slot="end">R$ {{ticket.extras.priceBaggage}},00</p>
     </ion-item>
     <div class="hr"> </div>
     <ion-item>
-      <ion-label color="medium" slot="start">Alimentação</ion-label>
-      <p slot="end">R$ 150,00</p>
-    </ion-item>
-    <div class="hr"> </div>
-    <ion-item>
-      <ion-label color="medium" slot="start">Hotel</ion-label>
-      <p slot="end">R$ 350,00</p>
+      <ion-label *ngIf="ticket.extras.foodIncluded" color="medium" slot="start">Hotel + Alimentação</ion-label>
+      <ion-label *ngIf="!ticket.extras.foodIncluded" color="medium" slot="start">Hotel</ion-label>
+      <p slot="end">R$ {{ticket.extras.priceHotel}},00</p>
     </ion-item>
     <div class="hr"> </div>
     <ion-item>
       <ion-label slot="start"><b>Total da Viagem</b></ion-label>
-      <p slot="end"><b>R$ 600,00</b></p>
+      <p slot="end"><b>R$ {{priceTotal}},00</b></p>
     </ion-item>
     <div class="hr"> </div>
   </ion-list>
@@ -50,7 +46,7 @@
 
     <ion-card-content>
       <ion-text slot="end" style="font-size: 34px;">
-        R$ 600,00
+        R$ {{priceTotal}},00
       </ion-text>
     </ion-card-content>
   </ion-card>
