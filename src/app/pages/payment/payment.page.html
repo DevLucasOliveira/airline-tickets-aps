@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons>
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button style="display: block;" (click)="onBack()"></ion-back-button>
       <ion-title size="auto"> Pagamento </ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -15,7 +15,7 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <h1>R$ 600.00</h1>
+      <h1>R$ {{ticket.priceTotal}},00</h1>
     </ion-card-content>
   </ion-card>
 
@@ -32,7 +32,7 @@
             <ion-item class="formGroup">
               <ion-label position="floating">Nome do comprador</ion-label>
               <ion-input type="text" formControlName="cardholderName"></ion-input>
-              <span *ngIf="form.controls.cardholderName.invalid && form.controls.cardholderName.touched"
+              <span *ngIf="form.controls.cardholderName.invalid && submitted"
                 class="form-error">Campo obrigatório!</span>
             </ion-item>
           </ion-row>
@@ -40,7 +40,7 @@
             <ion-item class="formGroup">
               <ion-label position="floating">Número do cartão</ion-label>
               <ion-input type="text" formControlName="number" mask="####.####.####.####"></ion-input>
-              <span *ngIf="form.controls.number.invalid && form.controls.number.touched" class="form-error">Campo
+              <span *ngIf="form.controls.number.invalid && submitted" class="form-error">Campo
                 obrigatório!</span>
             </ion-item>
           </ion-row>
@@ -48,7 +48,7 @@
             <ion-item class="formGroup">
               <ion-label position="floating">Validade</ion-label>
               <ion-input type="date" formControlName="expirationDate"></ion-input>
-              <span *ngIf="form.controls.expirationDate.invalid && form.controls.expirationDate.touched"
+              <span *ngIf="form.controls.expirationDate.invalid && submitted"
                 class="form-error">PCampo obrigatório!</span>
             </ion-item>
           </ion-row>
@@ -56,8 +56,8 @@
             <ion-col size="6">
               <ion-item class="formGroup">
                 <ion-label position="floating">Parcelas</ion-label>
-                <ion-input type="number" formControlName="installments" mask="##"></ion-input>
-                <span *ngIf="form.controls.installments.invalid && form.controls.installments.touched"
+                <ion-input type="number" min="1" max="12" formControlName="installments" mask="##"></ion-input>
+                <span *ngIf="form.controls.installments.invalid && submitted"
                   class="form-error">Campo obrigatório!</span>
               </ion-item>
             </ion-col>
@@ -65,7 +65,7 @@
               <ion-item class="formGroup">
                 <ion-label position="floating">CVV</ion-label>
                 <ion-input type="text" formControlName="cvv" maxlength="3" mask="###"></ion-input>
-                <span *ngIf="form.controls.cvv.invalid && form.controls.cvv.touched" class="form-error">Campo
+                <span *ngIf="form.controls.cvv.invalid && submitted" class="form-error">Campo
                   obrigatório!</span>
               </ion-item>
             </ion-col>
@@ -74,5 +74,5 @@
       </form>
     </ion-card-content>
   </ion-card>
-  <ion-button type="button" color="success" expand="block" (click)="onConfirm()">COMPRAR</ion-button>
+  <ion-button [disabled]="this.form.invalid" type="button" color="success" expand="block" (click)="onConfirm()">COMPRAR</ion-button>
 </ion-content>

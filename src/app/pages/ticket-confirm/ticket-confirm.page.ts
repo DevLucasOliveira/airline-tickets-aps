@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {Ticket} from '../../../shared/objects';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-ticket-confirm',
@@ -24,7 +25,8 @@ export class TicketConfirmPage implements OnInit {
   ticket: Ticket = new Ticket();
   constructor(
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private location: Location) {
     this.route.queryParams.subscribe(params => {
       this.ticket = JSON.parse(params.ticket);
       console.log(this.ticket);
@@ -94,4 +96,7 @@ export class TicketConfirmPage implements OnInit {
     }
   }
 
+  onBack() {
+    this.location.back();
+  }
 }

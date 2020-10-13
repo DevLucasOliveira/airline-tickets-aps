@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons>
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button style="display: block;" (click)="onBack()"></ion-back-button>
       <ion-title size="auto"> Pagamento </ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -52,5 +52,5 @@
   </ion-card>
 
 
-  <ion-button color="success" expand="block">Prosseguir para compra</ion-button>
+  <ion-button color="success" (click)="goToPayment()" expand="block">Prosseguir para compra</ion-button>
 </ion-content>

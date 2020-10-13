@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {Ticket} from '../../../shared/objects';
 
 @Component({
   selector: 'app-payment',
@@ -10,12 +12,19 @@ import { NavigationExtras, Router } from '@angular/router';
 export class PaymentPage implements OnInit {
 
   form: FormGroup;
+  ticket: Ticket = new Ticket();
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
   ) {
     this.buildForm();
+    this.route.queryParams.subscribe(params => {
+      this.ticket = JSON.parse(params.ticket);
+    });
   }
 
   ngOnInit() {
@@ -26,12 +35,13 @@ export class PaymentPage implements OnInit {
       cardholderName: ['', Validators.required],
       number: ['', Validators.required],
       cvv: ['', Validators.required],
-      installments: [0, Validators.required],
+      installments: [1, Validators.required],
       expirationDate: [0, Validators.required]
     });
   }
 
   onConfirm() {
+    this.submitted = true;
     if (this.form.invalid)
       return;
 
@@ -44,4 +54,8 @@ export class PaymentPage implements OnInit {
     this.router.navigate(['ticket-success'], navigationExtras);
   }
 
+
+  onBack() {
+    this.location.back();
+  }
 }

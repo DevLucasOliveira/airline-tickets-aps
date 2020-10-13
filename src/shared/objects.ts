@@ -12,6 +12,7 @@ export class Ticket {
     travelPrice: number;
     extras: TravelExtras;
     placePicture: string;
+    priceTotal: number;
 }
 
 export class TravelExtras {
