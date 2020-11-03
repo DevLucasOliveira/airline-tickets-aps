@@ -17,6 +17,20 @@ export class CacheService<T> {
     }
   }
 
+  public getAll(key: string): T[] {
+    if (this.isLocalStorageSupported) {
+      return JSON.parse(this.localStorage.getItem(key));
+    }
+  }
+
+  public setAll(key: string, value: T[]): boolean {
+    if (this.isLocalStorageSupported) {
+      this.localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    }
+    return false;
+  }
+
   public set(key: string, value: T): boolean {
     if (this.isLocalStorageSupported) {
       this.localStorage.setItem(key, JSON.stringify(value));
