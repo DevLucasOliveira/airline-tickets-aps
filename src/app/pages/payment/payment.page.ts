@@ -49,12 +49,15 @@ export class PaymentPage implements OnInit {
       return;
     }
 
+    const historicSaved = this.saveHistoric();
+
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        card: JSON.stringify(this.form.value)
+        card: JSON.stringify(this.form.value),
+        historicId: historicSaved.id
       }
     };
-    this.saveHistoric();
+
     this.router.navigate(['ticket-success'], navigationExtras);
   }
 
@@ -63,7 +66,7 @@ export class PaymentPage implements OnInit {
     this.location.back();
   }
 
-  saveHistoric() {
+  saveHistoric(): Historic {
     const historic = new HistoricBuilder()
       .destiny(this.ticket.filter.destiny)
       .origin(this.ticket.filter.origin)
@@ -71,12 +74,13 @@ export class PaymentPage implements OnInit {
       .totalPeople(this.ticket.filter.totalPeople)
       .build();
 
-    const existentHistoric = this.cacheService.getAll('history');
+    const existentHistoric = this.cacheService.getAll('historic');
     if (existentHistoric) {
       existentHistoric.push(historic);
-      this.cacheService.setAll('history', existentHistoric);
+      this.cacheService.setAll('historic', existentHistoric);
     } else {
-      this.cacheService.setAll('history', [historic]);
+      this.cacheService.setAll('historic', [historic]);
     }
+    return historic;
   }
 }

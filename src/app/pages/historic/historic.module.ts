@@ -1,3 +1,4 @@
+import { HistoricCardComponent } from './components/historic-card/historic-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { HistoricPage } from './historic.page';
     IonicModule,
     HistoricPageRoutingModule
   ],
-  declarations: [HistoricPage]
+  declarations: [HistoricPage, HistoricCardComponent]
 })
-export class HistoricPageModule {}
+export class HistoricPageModule { }
