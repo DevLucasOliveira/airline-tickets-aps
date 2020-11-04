@@ -28,8 +28,15 @@ describe('CacheService', () => {
   });
 
   it('searching ticket', () => {
+    service.set('ticketTeste', ticketMock);
     const ticketResult: Ticket = service.get('ticketTeste');
     expect(ticketResult.travelPrice).toEqual(ticketMock.travelPrice);
+  });
+
+  it('searching tickets', () => {
+    service.setAll('ticketTeste', [ticketMock, ticketMock]);
+    const tickets: Ticket[] = service.getAll('ticketTeste');
+    expect(tickets.length).toEqual(2);
   });
 
   it('removing ticket', () => {

@@ -1,6 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-success',
@@ -9,15 +8,17 @@ import { Location } from '@angular/common';
 })
 export class TicketSuccessPage implements OnInit {
 
-  qrcode = "Aqui deve ser colocado o valor para se transformar em QR Code";
+  ticketGeneratedIdQRCode = '';
 
   constructor(
     private route: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log(JSON.parse(params.card));
+      this.ticketGeneratedIdQRCode = params.historicId;
+      console.log('Ticket gerado com o ID de histórico: ', params.historicId);
     });
   }
 
