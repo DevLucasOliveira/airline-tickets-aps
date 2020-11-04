@@ -38,7 +38,13 @@ export class RegisterPage implements OnInit {
       this.toastService.formInvalid();
       return;
     }
+
     let form = this.form.controls;
+    if (form.password.value.length < 6) {
+      this.toastService.passwordInvalid();
+      return;
+    }
+
     this.user = new User(form.name.value, form.email.value, form.password.value);
 
     this.cacheService.set("User", this.user);

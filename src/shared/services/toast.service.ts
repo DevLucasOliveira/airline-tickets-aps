@@ -49,4 +49,14 @@ export class ToastService {
         toast.present();
     }
 
+    async passwordInvalid() {
+        const toast = await this.toastController.create({
+            message: 'Senha tem que ter ao menos 6 caracteres',
+            duration: 2000,
+            color: 'warning',
+            position: 'top',
+        });
+        toast.present();
+    }
+
 }
