@@ -1,7 +1,7 @@
 import { ToastService } from './../../../shared/services/toast.service';
 import { CacheService } from './../../../shared/services/cache.service';
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { User } from 'src/shared/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -39,9 +39,9 @@ export class RegisterPage implements OnInit {
       return;
     }
     let form = this.form.controls;
-    this.user = new User(form.name.value, form.email.value, form.password.value, true);
+    this.user = new User(form.name.value, form.email.value, form.password.value);
 
-    this.cacheService.set("Usuário", this.user);
+    this.cacheService.set("User", this.user);
     this.toastService.formValid();
 
     this.navCtrl.navigateRoot('home');

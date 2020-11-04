@@ -13,17 +13,21 @@
                             <ion-icon slot="start" name="airplane" class="icon"></ion-icon>
                             <ion-label>Passagens</ion-label>
                         </ion-item>
-                        <ion-item routerLink="historic">
+                        <ion-item routerLink="historic" *ngIf="loggged">
                             <ion-icon slot="start" name="receipt"></ion-icon>
                             <ion-label>Histórico</ion-label>
                         </ion-item>
-                        <ion-item routerLink="login">
+                        <ion-item routerLink="login" *ngIf="!loggged">
                             <ion-icon slot="start" name="enter"></ion-icon>
                             <ion-label>Acesse sua conta</ion-label>
                         </ion-item>
-                        <ion-item routerLink="register">
+                        <ion-item routerLink="register" *ngIf="!loggged">
                             <ion-icon slot="start" name="person-add"></ion-icon>
                             <ion-label>Cadastre-se</ion-label>
+                        </ion-item>
+                        <ion-item routerLink="home" *ngIf="loggged">
+                            <ion-icon slot="start" name="enter"></ion-icon>
+                            <ion-label (click)="getOut()">Sair</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>

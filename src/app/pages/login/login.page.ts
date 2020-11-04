@@ -40,8 +40,13 @@ export class LoginPage implements OnInit {
     }
     let form = this.form.controls;
 
-    this.user = new User(null, form.email.value, form.password.value, true);
-    this.userLogin = this.cacheService.get("Usuário");
+    this.user = new User(null, form.email.value, form.password.value);
+    this.userLogin = this.cacheService.get("User");
+
+    if (this.userLogin == null) {
+      this.toastService.loginInvalid();
+      return;
+    }
 
     if (this.user.email != this.userLogin.email || this.user.password != this.userLogin.password) {
       this.toastService.loginInvalid();
@@ -51,5 +56,6 @@ export class LoginPage implements OnInit {
     this.toastService.loginValid(this.userLogin.name);
     this.navCtrl.navigateRoot('home');
   }
+
 
 }
