@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CacheService } from 'src/shared/services/cache.service';
+import { ToastService } from 'src/shared/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ export class LoginPage implements OnInit {
   user: User;
   userLogin: User;
 
-  constructor(public navCtrl: NavController, private cacheService: CacheService<User>, private formBuilder: FormBuilder) { }
+  constructor(
+    public navCtrl: NavController,
+    private cacheService: CacheService<User>,
+    private formBuilder: FormBuilder,
+    public toastService: ToastService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -30,6 +35,7 @@ export class LoginPage implements OnInit {
 
   login() {
     if (!this.form.valid) {
+      this.toastService.formInvalid();
       return;
     }
     let form = this.form.controls;
@@ -38,9 +44,11 @@ export class LoginPage implements OnInit {
     this.userLogin = this.cacheService.get("Usuário");
 
     if (this.user.email != this.userLogin.email || this.user.password != this.userLogin.password) {
+      this.toastService.loginInvalid();
       return;
     }
 
+    this.toastService.loginValid(this.userLogin.name);
     this.navCtrl.navigateRoot('home');
   }
 
