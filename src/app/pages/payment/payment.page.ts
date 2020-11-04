@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Ticket} from '../../../shared/objects';
+import {CacheService} from '../../../shared/services/cache.service';
+import {Historic, HistoricBuilder} from '../../../shared/historic';
 
 @Component({
   selector: 'app-payment',
@@ -19,7 +21,8 @@ export class PaymentPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private cacheService: CacheService<Historic>,
   ) {
     this.buildForm();
     this.route.queryParams.subscribe(params => {
@@ -42,20 +45,38 @@ export class PaymentPage implements OnInit {
 
   onConfirm() {
     this.submitted = true;
-    if (this.form.invalid)
+    if (this.form.invalid) {
       return;
+    }
 
     const navigationExtras: NavigationExtras = {
       queryParams: {
         card: JSON.stringify(this.form.value)
       }
     };
-
+    this.saveHistoric();
     this.router.navigate(['ticket-success'], navigationExtras);
   }
 
 
   onBack() {
     this.location.back();
+  }
+
+  saveHistoric() {
+    const historic = new HistoricBuilder()
+        .destiny(this.ticket.filter.destiny)
+        .origin(this.ticket.filter.origin)
+        .priceTotal(this.ticket.priceTotal)
+        .totalPeople(this.ticket.filter.totalPeople)
+        .build();
+
+    const existentHistoric = this.cacheService.getAll('history');
+    if (existentHistoric) {
+      existentHistoric.push(historic);
+      this.cacheService.setAll('history', existentHistoric);
+    } else {
+      this.cacheService.setAll('history', [historic]);
+    }
   }
 }
