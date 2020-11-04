@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Historic } from './../../../../../shared/historic';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-historic-card',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoricCardComponent implements OnInit {
 
+  @Input() historic: Historic;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
