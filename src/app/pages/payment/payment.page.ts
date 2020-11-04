@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {Location} from '@angular/common';
-import {Ticket} from '../../../shared/objects';
-import {CacheService} from '../../../shared/services/cache.service';
-import {Historic, HistoricBuilder} from '../../../shared/historic';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { Ticket } from '../../../shared/objects';
+import { CacheService } from '../../../shared/services/cache.service';
+import { Historic, HistoricBuilder } from '../../../shared/historic';
 
 @Component({
   selector: 'app-payment',
@@ -65,11 +65,11 @@ export class PaymentPage implements OnInit {
 
   saveHistoric() {
     const historic = new HistoricBuilder()
-        .destiny(this.ticket.filter.destiny)
-        .origin(this.ticket.filter.origin)
-        .priceTotal(this.ticket.priceTotal)
-        .totalPeople(this.ticket.filter.totalPeople)
-        .build();
+      .destiny(this.ticket.filter.destiny)
+      .origin(this.ticket.filter.origin)
+      .priceTotal(this.ticket.priceTotal)
+      .totalPeople(this.ticket.filter.totalPeople)
+      .build();
 
     const existentHistoric = this.cacheService.getAll('history');
     if (existentHistoric) {
