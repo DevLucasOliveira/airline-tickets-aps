@@ -14,6 +14,7 @@ export class RegisterPage implements OnInit {
 
   form: FormGroup;
   user: User;
+  users: User[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -23,6 +24,10 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.users = this.cacheService.getAll('users');
+    if (!this.users) {
+      this.users = [];
+    }
   }
 
   buildForm() {
@@ -41,7 +46,8 @@ export class RegisterPage implements OnInit {
     let form = this.form.controls;
     this.user = new User(form.name.value, form.email.value, form.password.value);
 
-    this.cacheService.set("User", this.user);
+    this.users.push(this.user);
+    this.cacheService.setAll("users", this.users);
     this.toastService.formValid();
 
     this.navCtrl.navigateRoot('home');

@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
 
   form: FormGroup;
   user: User;
-  userLogin: User;
+  users: User[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +24,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.users = this.cacheService.getAll('users');
+    if (!this.users) {
+      this.users = [];
+    }
   }
 
   buildForm() {
@@ -41,20 +45,19 @@ export class LoginPage implements OnInit {
     let form = this.form.controls;
 
     this.user = new User(null, form.email.value, form.password.value);
-    this.userLogin = this.cacheService.get("User");
 
-    if (this.userLogin == null) {
+
+    this.users.forEach(user => {
+      if (user.email == this.user.email && user.password == this.user.password) {
+        this.toastService.loginValid(user.name);
+        this.navCtrl.navigateRoot('home');
+        this.cacheService.set('user', this.user);
+        return;
+      }
+    });
+
+    if (!this.cacheService.get('user'))
       this.toastService.loginInvalid();
-      return;
-    }
-
-    if (this.user.email != this.userLogin.email || this.user.password != this.userLogin.password) {
-      this.toastService.loginInvalid();
-      return;
-    }
-
-    this.toastService.loginValid(this.userLogin.name);
-    this.navCtrl.navigateRoot('home');
   }
 
 
