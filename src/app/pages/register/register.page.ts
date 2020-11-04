@@ -54,6 +54,7 @@ export class RegisterPage implements OnInit {
 
     this.users.push(this.user);
     this.cacheService.setAll("users", this.users);
+    this.cacheService.set('user', this.user);
     this.toastService.formValid();
 
     this.navCtrl.navigateRoot('home');

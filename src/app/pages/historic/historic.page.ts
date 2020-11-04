@@ -15,7 +15,6 @@ export class HistoricPage implements OnInit {
 
   ngOnInit() {
     this.historics = this.cacheService.getAll('historic');
-    console.log(this.historics);
   }
 
 }

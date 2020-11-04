@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,15 +11,18 @@ export class TicketSuccessPage implements OnInit {
   ticketGeneratedIdQRCode = '';
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.ticketGeneratedIdQRCode = params.historicId;
-      console.log('Ticket gerado com o ID de histórico: ', params.historicId);
     });
   }
 
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

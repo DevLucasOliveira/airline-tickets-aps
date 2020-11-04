@@ -21,7 +21,6 @@ export class TicketListPage implements OnInit {
     private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.ticketsToBuy = [];
       this.filter = JSON.parse(params.card);
       for (let i = 0; i < this.TOTAL_TICKETS_IN_LIST; i++) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {Ticket} from '../../../shared/objects';
-import {Location} from '@angular/common';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Ticket } from '../../../shared/objects';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-confirm',
@@ -29,7 +29,6 @@ export class TicketConfirmPage implements OnInit {
     private location: Location) {
     this.route.queryParams.subscribe(params => {
       this.ticket = JSON.parse(params.ticket);
-      console.log(this.ticket);
     });
   }
 
