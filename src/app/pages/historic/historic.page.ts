@@ -1,3 +1,5 @@
+import { CacheService } from './../../../shared/services/cache.service';
+import { Historic } from './../../../shared/historic';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoricPage implements OnInit {
 
-  constructor() { }
+  historics: Historic[];
+
+  constructor(private cacheService: CacheService<Historic>) { }
 
   ngOnInit() {
+    this.historics = this.cacheService.getAll('historic');
+    console.log(this.historics);
   }
 
 }
