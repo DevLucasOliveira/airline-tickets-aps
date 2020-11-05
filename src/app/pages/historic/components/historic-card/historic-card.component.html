@@ -3,7 +3,7 @@
     <ion-card-title>Viagem</ion-card-title>
     <ion-icon name="airplane" size="large"></ion-icon>
     <ion-card-subtitle>
-      <ion-icon name="person"></ion-icon>{{ historic.totalPeople }}
+      Pessoas <ion-icon name="person"></ion-icon>{{ historic.totalPeople }}
     </ion-card-subtitle>
   </ion-card-header>
 
@@ -18,7 +18,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        Preço total: {{ historic.priceTotal }}
+        <b>Preço total: {{ historic.priceTotal }}</b>
       </ion-row>
     </ion-grid>
   </ion-card-content>
