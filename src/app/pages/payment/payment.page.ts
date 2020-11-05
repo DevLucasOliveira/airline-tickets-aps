@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Ticket } from '../../../shared/objects';
 import { CacheService } from '../../../shared/services/cache.service';
 import { Historic, HistoricBuilder } from '../../../shared/historic';
+import { User } from 'src/shared/user';
 
 @Component({
   selector: 'app-payment',
@@ -22,7 +23,8 @@ export class PaymentPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private cacheService: CacheService<Historic>,
+    private historyCacheService: CacheService<Historic>,
+    private userCacheService: CacheService<User>
   ) {
     this.buildForm();
     this.route.queryParams.subscribe(params => {
@@ -67,19 +69,23 @@ export class PaymentPage implements OnInit {
   }
 
   saveHistoric(): Historic {
+    const user = this.userCacheService.get('user');
+
     const historic = new HistoricBuilder()
       .destiny(this.ticket.filter.destiny)
       .origin(this.ticket.filter.origin)
       .priceTotal(this.ticket.priceTotal)
       .totalPeople(this.ticket.filter.totalPeople)
+      .userEmail(user.email)
       .build();
 
-    const existentHistoric = this.cacheService.getAll('historic');
+    const existentHistoric = this.historyCacheService.getAll('historic');
+
     if (existentHistoric) {
       existentHistoric.push(historic);
-      this.cacheService.setAll('historic', existentHistoric);
+      this.historyCacheService.setAll('historic', existentHistoric);
     } else {
-      this.cacheService.setAll('historic', [historic]);
+      this.historyCacheService.setAll('historic', [historic]);
     }
     return historic;
   }
