@@ -4,6 +4,7 @@ export class Historic {
     destiny: string;
     totalPeople: number;
     priceTotal: number;
+    userEmail: string;
 }
 
 export class HistoricBuilder {
@@ -15,7 +16,8 @@ export class HistoricBuilder {
             origin: '',
             destiny: '',
             totalPeople: 0,
-            priceTotal: 0
+            priceTotal: 0,
+            userEmail: ''
         };
     }
 
@@ -43,6 +45,12 @@ export class HistoricBuilder {
         this.historic.priceTotal = priceTotal;
         return this;
     }
+
+    userEmail(userEmail: string): HistoricBuilder {
+        this.historic.userEmail = userEmail;
+        return this;
+    }
+
 
     build(): Historic {
         return this.historic;
