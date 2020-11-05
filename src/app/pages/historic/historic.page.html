@@ -9,6 +9,6 @@
 
 <ion-content>
   <div *ngFor="let historic of historics">
-    <app-historic-card [historic]="historic"></app-historic-card>
+    <app-historic-card *ngIf="historic.userEmail === userEmail" [historic]="historic"></app-historic-card>
   </div>
 </ion-content>
