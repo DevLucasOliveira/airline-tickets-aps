@@ -1,3 +1,4 @@
+import { CovidService } from './../../services/covid.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     TicketSuccessPageRoutingModule,
     NgxQRCodeModule
   ],
-  declarations: [TicketSuccessPage]
+  declarations: [TicketSuccessPage],
+  providers: [CovidService]
 })
 export class TicketSuccessPageModule { }
