@@ -22,3 +22,11 @@ export class TravelExtras {
     priceHotel: number;
     foodIncluded: boolean;
 }
+
+export class State {
+    id: number;
+    nome: string;
+    sigla: string;
+}
+
+
