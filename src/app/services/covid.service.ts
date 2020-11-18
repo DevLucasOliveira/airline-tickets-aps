@@ -12,7 +12,7 @@ export class CovidService {
     private http: HttpService
   ) { }
 
-  getCovidStatus(): Observable<any> {
-    return this.http.get(`report/v1`);
+  getCovidStatus(uf: string): Observable<any> {
+    return this.http.get(`report/v1/brazil/uf/${uf}`);
   }
 }

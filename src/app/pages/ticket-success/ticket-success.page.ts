@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketSuccessPage implements OnInit {
 
-  covidStatus: CovidStatus[] = [];
   currentCovidStatus: CovidStatus;
   ticketGeneratedIdQRCode = '';
 
@@ -26,9 +25,8 @@ export class TicketSuccessPage implements OnInit {
       this.ticketGeneratedIdQRCode = params.historicId;
     });
 
-    this.covidService.getCovidStatus().subscribe(response => {
-      Object.assign(this.covidStatus, response.data);
-      this.currentCovidStatus = this.covidStatus.find(status => status.uf == 'MG');
+    this.covidService.getCovidStatus('sp').subscribe(response => {
+      this.currentCovidStatus = response;
       console.log(this.currentCovidStatus);
     });
   }
