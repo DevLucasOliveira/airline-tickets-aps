@@ -1,6 +1,7 @@
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FilterDTO } from '../../../shared/objects';
+import { FilterDTO, State } from '../../../shared/objects';
+import { StateService } from 'src/shared/services/state.service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +12,20 @@ export class HomePage implements OnInit {
 
   filter: FilterDTO = new FilterDTO();
   submitted = false;
+  states: State[] = [];
 
   date = new Date().toJSON().split('T')[0];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private stateService: StateService
   ) {
   }
 
   ngOnInit() {
     this.getFilter();
+    this.getStates();
   }
 
   getFilter() {
@@ -30,6 +34,14 @@ export class HomePage implements OnInit {
         this.filter = JSON.parse(params.card);
       }
     });
+  }
+
+  getStates() {
+    this.stateService.getAll().subscribe(
+      response => {
+        this.states = response;
+      }
+    )
   }
 
 
@@ -42,9 +54,9 @@ export class HomePage implements OnInit {
 
   isValidFilter() {
     return this.filter.origin &&
-        this.filter.destiny &&
-        this.filter.totalPeople &&
-        this.filter.travelDate;
+      this.filter.destiny &&
+      this.filter.totalPeople &&
+      this.filter.travelDate;
   }
 
   navigate(filterDTO: FilterDTO) {

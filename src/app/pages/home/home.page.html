@@ -21,7 +21,10 @@
                 <ion-col>
                     <ion-item>
                         <ion-label for="origin" position="floating">Origem</ion-label>
-                        <ion-input type="text" name="origin" [(ngModel)]="filter.origin"></ion-input>
+                        <ion-select name="origin" placeholder="Selecionar" [(ngModel)]="filter.origin">
+                            <ion-select-option *ngFor="let state of states" value="{{state.sigla}}">{{state.nome}}
+                            </ion-select-option>
+                        </ion-select>
                         <span *ngIf="submitted && !filter.origin" class="form-error">Campo obrigatório!</span>
                     </ion-item>
                 </ion-col>
@@ -33,7 +36,10 @@
                 <ion-col>
                     <ion-item>
                         <ion-label for="destiny" position="floating">Destino</ion-label>
-                        <ion-input type="text" name="destiny" [(ngModel)]="filter.destiny"></ion-input>
+                        <ion-select name="destiny" placeholder="Selecionar" [(ngModel)]="filter.destiny">
+                            <ion-select-option *ngFor="let state of states" value="{{state.sigla}}">{{state.nome}}
+                            </ion-select-option>
+                        </ion-select>
                         <span *ngIf="submitted && !filter.destiny" class="form-error">Campo obrigatório!</span>
                     </ion-item>
                 </ion-col>
