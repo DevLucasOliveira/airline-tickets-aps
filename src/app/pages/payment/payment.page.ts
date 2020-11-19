@@ -55,7 +55,7 @@ export class PaymentPage implements OnInit {
 
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        card: JSON.stringify(this.form.value),
+        card: JSON.stringify(this.ticket),
         historicId: historicSaved.id
       }
     };

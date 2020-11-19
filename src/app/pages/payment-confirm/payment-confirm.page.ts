@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Ticket} from '../../../shared/objects';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {Location} from '@angular/common';
+import { Ticket } from '../../../shared/objects';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-payment-confirm',
@@ -14,9 +14,9 @@ export class PaymentConfirmPage implements OnInit {
   priceTotal = 0;
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private location: Location
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {
     this.route.queryParams.subscribe(params => {
       this.ticket = JSON.parse(params.ticket);
@@ -29,8 +29,8 @@ export class PaymentConfirmPage implements OnInit {
 
   calculateTravelTotalPrice() {
     this.priceTotal = this.ticket.travelPrice
-        + this.ticket.extras.priceHotel
-        + this.ticket.extras.priceBaggage;
+      + this.ticket.extras.priceHotel
+      + this.ticket.extras.priceBaggage;
   }
 
   onBack() {

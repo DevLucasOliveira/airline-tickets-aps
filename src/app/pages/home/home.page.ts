@@ -40,10 +40,8 @@ export class HomePage implements OnInit {
     this.stateService.getAll().subscribe(
       response => {
         this.states = response;
-      }
-    )
+      });
   }
-
 
   search() {
     this.submitted = true;
