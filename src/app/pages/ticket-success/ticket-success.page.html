@@ -8,9 +8,17 @@
 
 <ion-content>
   <ion-grid>
-    <h2 style="color:rgb(212, 98, 77);">Mortes: {{this.currentCovidStatus?.deaths }}</h2>
-    <h2 style="color:rgb(212, 98, 77);">Casos: {{this.currentCovidStatus?.cases }}</h2>
-    <h2 style="color:rgb(212, 98, 77);">Suspeitos: {{this.currentCovidStatus?.suspects }}</h2>
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>Atenção:</ion-card-title>
+        <ion-card-subtitle>Estatísticas do COVID-19 no estado de <b>{{ currentCovidStatus?.state }}</b>
+        </ion-card-subtitle>
+        <h2 style="color:rgb(212, 98, 77);">Mortes: {{ currentCovidStatus?.deaths }}</h2>
+        <h2 style="color:rgb(212, 98, 77);">Casos: {{ currentCovidStatus?.cases }}</h2>
+        <h2 style="color:rgb(212, 98, 77);">Suspeitos: {{ currentCovidStatus?.suspects }}</h2>
+        <p>Tenha cuidado, use máscara e mantenha distanciamento social</p>
+      </ion-card-content>
+    </ion-card>
     <ion-row>
       <ion-col class="ion-text-center">
         <h1 style="color:rgb(99, 112, 255);">Compra efetuada com</h1><br>

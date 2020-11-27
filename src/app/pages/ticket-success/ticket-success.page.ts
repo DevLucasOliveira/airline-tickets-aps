@@ -22,17 +22,16 @@ export class TicketSuccessPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.ticket = JSON.parse(params.card);
+
+      this.covidService.getCovidStatus(this.ticket.filter.destiny).subscribe(response => {
+        this.currentCovidStatus = response;
+      });
     });
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.ticketGeneratedIdQRCode = params.historicId;
-    });
-
-    this.covidService.getCovidStatus(this.ticket.filter.destiny).subscribe(response => {
-      this.currentCovidStatus = response;
-      console.log(this.currentCovidStatus);
     });
   }
 
