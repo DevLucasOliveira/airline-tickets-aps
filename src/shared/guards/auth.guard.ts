@@ -1,26 +1,24 @@
-import { CacheService } from './../services/cache.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { User } from '../user';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private cacheService: CacheService<User>) { }
+  constructor(
+      private router: Router,
+      private authService: AuthService
+  ) { }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const authorized = this.cacheService.get('user');
-
-    if (authorized) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
       return true;
-    } else {
-      this.router.navigate(["/login"], {
-        queryParams: { redirect: state.url },
-        replaceUrl: true
-      });
-      return false;
     }
 
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
 }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://covid19-brazil-api.now.sh/api/"
+  apiUrl: 'https://covid19-brazil-api.now.sh/api/',
+  backendURL: 'https://airlineticketsapi20201127200201.azurewebsites.net/'
 };
 
 /*

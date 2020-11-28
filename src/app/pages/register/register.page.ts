@@ -1,9 +1,11 @@
-import { ToastService } from './../../../shared/services/toast.service';
-import { CacheService } from './../../../shared/services/cache.service';
+import { ToastService } from '../../../shared/services/toast.service';
+import { CacheService } from '../../../shared/services/cache.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { User } from 'src/shared/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {first} from 'rxjs/operators';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +22,9 @@ export class RegisterPage implements OnInit {
     public navCtrl: NavController,
     private cacheService: CacheService<User>,
     private formBuilder: FormBuilder,
-    public toastService: ToastService) { }
+    public toastService: ToastService,
+    public authService: AuthService,
+    ) { }
 
   ngOnInit() {
     this.buildForm();
@@ -44,7 +48,7 @@ export class RegisterPage implements OnInit {
       return;
     }
 
-    let form = this.form.controls;
+    const form = this.form.controls;
     if (form.password.value.length < 6) {
       this.toastService.passwordInvalid();
       return;
@@ -52,12 +56,15 @@ export class RegisterPage implements OnInit {
 
     this.user = new User(form.name.value, form.email.value, form.password.value);
 
-    this.users.push(this.user);
-    this.cacheService.setAll("users", this.users);
-    this.cacheService.set('user', this.user);
-    this.toastService.formValid();
-
-    this.navCtrl.navigateRoot('home');
+    this.authService.register(this.user)
+        .pipe(first())
+        .subscribe(
+            data => {
+              console.log(data);
+            },
+            error => {
+              console.log(error);
+            });
   }
 
 

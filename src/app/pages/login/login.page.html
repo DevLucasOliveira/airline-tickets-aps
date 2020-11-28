@@ -12,6 +12,11 @@
   <ion-card>
     <ion-card-content>
       <form [formGroup]="form">
+        <ion-row *ngIf="!userAuthResponse?.success">
+          <ion-col class="ion-text-center">
+            <ion-text style="color: red; font-weight: bold">{{userAuthResponse?.message}}</ion-text>
+          </ion-col>
+        </ion-row>
         <ion-item>
           <ion-label position="floating">Email</ion-label>
           <ion-input type="text" formControlName="email"></ion-input>

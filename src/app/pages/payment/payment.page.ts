@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Ticket } from '../../../shared/objects';
 import { CacheService } from '../../../shared/services/cache.service';
 import { Historic, HistoricBuilder } from '../../../shared/historic';
-import { User } from 'src/shared/user';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -24,7 +24,7 @@ export class PaymentPage implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private historyCacheService: CacheService<Historic>,
-    private userCacheService: CacheService<User>
+    private authService: AuthService
   ) {
     this.buildForm();
     this.route.queryParams.subscribe(params => {
@@ -69,7 +69,7 @@ export class PaymentPage implements OnInit {
   }
 
   saveHistoric(): Historic {
-    const user = this.userCacheService.get('user');
+    const user = this.authService.currentUserValue;
 
     const historic = new HistoricBuilder()
       .destiny(this.ticket.filter.destiny)

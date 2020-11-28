@@ -8,6 +8,15 @@ export class ToastService {
 
     constructor(public toastController: ToastController) { }
 
+    async custom(message: string, color: string, position: any) {
+        const toast = await this.toastController.create({
+            message,
+            duration: 2000,
+            color,
+            position,
+        });
+        toast.present();
+    }
 
     async formInvalid() {
         const toast = await this.toastController.create({

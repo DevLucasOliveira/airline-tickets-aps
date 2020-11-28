@@ -11,4 +11,11 @@
   <div *ngFor="let historic of historics">
     <app-historic-card *ngIf="historic.userEmail === userEmail" [historic]="historic"></app-historic-card>
   </div>
+  <div *ngIf="!historics || historics.length === 0">
+    <ion-row class="ion-margin-top">
+      <ion-col class="ion-text-center">
+        <ion-text >Você não possui histórico de passagens!</ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>
